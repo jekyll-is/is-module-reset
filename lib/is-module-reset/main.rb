@@ -49,7 +49,7 @@ module IS::ModuleReset
       state[mod] = mod_state
       mod.constants(false).each do |const|
         value = mod.const_get(const)
-        dump_module state, value if value.is_a?(Module)
+        dump_module state, value if value.is_a?(Module) && !state.has_key?(value)
       end
     end
 
