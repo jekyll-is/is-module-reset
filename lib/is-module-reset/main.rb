@@ -30,9 +30,10 @@ module IS::ModuleReset
     end
 
     def isolate *mods
-      raise 'Block is required!' unless block_given?
+      raise ArgumentError, 'Block is required!' unless block_given?
       state = dump(*mods)
       yield
+    ensure
       undump state
     end
 
