@@ -17,7 +17,7 @@ Gem::Specification::new do |s|
 
   s.required_ruby_version = '>= 3.4'
 
-  s.add_dependency 'is-deep',   '>= 0.8.0.2'
+  s.add_dependency 'is-deep', '~> 0.8', '>= 0.8.0.4'
 
   s.add_development_dependency 'rspec',     '~> 3.13'
   s.add_development_dependency 'rake',      '~> 13.3'
