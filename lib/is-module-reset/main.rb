@@ -17,8 +17,8 @@ module IS::ModuleReset
     end
 
     def undump state
-      state.each do |mod, mod_state|
-        mod.class_variables.each { mod.remove_class_variable it }
+      state.deep_dup.each do |mod, mod_state|
+        mod.class_variables(false).each { mod.remove_class_variable it }
         mod_state[:class_vars].each do |var, value|
           mod.class_variable_set var, value
         end
@@ -32,16 +32,18 @@ module IS::ModuleReset
     def isolate *mods
       raise ArgumentError, 'Block is required!' unless block_given?
       state = dump(*mods)
-      yield
-    ensure
-      undump state
+      begin
+        yield
+      ensure
+        undump state
+      end
     end
 
     private
 
     def dump_module state, mod
       mod_state = { instance_vars: {}, class_vars: {} }
-      mod.class_variables.each do |var|
+      mod.class_variables(false).each do |var|
         mod_state[:class_vars][var] = mod.class_variable_get(var)
       end
       mod.instance_variables.each do |var|

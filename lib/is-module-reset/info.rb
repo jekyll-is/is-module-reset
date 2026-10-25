@@ -6,7 +6,7 @@ module IS::ModuleReset; end
 module IS::ModuleReset::Info
 
   NAME = 'is-module-reset'
-  VERSION  = '0.8.0'
+  VERSION  = '0.8.0.2'
   SUMMARY  = 'Reset singletons data for testing'
   LICENSE  = 'LGPL-3.0-or-later'
   AUTHOR   = 'Ivan Shikhalev'
